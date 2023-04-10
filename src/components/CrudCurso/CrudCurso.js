@@ -4,19 +4,17 @@ import "./CrudCurso.css";
 import Main from "../template/Main";
 const title = "Cadastro de Curso";
 
-const urlAPI = "http://localhost:5176/api/curso";
+const urlAPI = "http://localhost:5139/api/curso";
 const initialState = {
   aluno: { id: 0, nome: '', periodo: '', codCurso: 0},
-  lista: {}
+  lista: [],
 }
-export default class CrudCurso extends Component {
-
-  state = {...initialState}
-
-  componentDidMount(){
-      axios(urlAPI).then(resp => {
-          this.setState({ lista: resp.data})
-      })
+export default class CrudAluno extends Component {
+  state = { ...initialState };
+  componentDidMount() {
+    axios(urlAPI).then((resp) => {
+      this.setState({ lista: resp.data });
+    });
   }
 
   renderTable() {
@@ -34,7 +32,7 @@ export default class CrudCurso extends Component {
             {this.state.lista.map(
               (aluno) =>
                 <tr key={aluno.id}>
-                  <td>{aluno.nome}</td>
+                  <td>{aluno.nomeCurso}</td>
                   <td>{aluno.periodo}</td>
                   <td>{aluno.codCurso}</td>
               </tr>
